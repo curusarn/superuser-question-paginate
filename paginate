@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+if [ $# -lt 1 ]; then
+    echo "ERROR: not enough arguments"
+    exit 1
+fi
+
+# find the location of "this" script
+base_path=$(dirname ${BASH_SOURCE[${#BASH_SOURCE[@]} - 1]})
+
+arg1=$1
+shift
+case $arg1 in
+    script1|script2|script3)
+        # do paginate
+       "$base_path/$arg1.sh" "$@" | less
+    ;;
+    *)
+        # throw error
+        echo "ERROR: unkonown command to paginate"
+        exit 2
+    ;;
+esac
